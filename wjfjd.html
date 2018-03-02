@@ -1,0 +1,419 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name='viewport' content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1.0,user-scalable=0" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Cache-Control" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>信用积分解读</title>
+  <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+  <script type="text/javascript" src="js/top.js"></script>
+	<script type="text/javascript" src="js/jquery.touchSlider.js"></script>
+  <link rel="stylesheet" href="css/reset.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="css/wjfjd.css" media="screen" title="no title" charset="utf-8">
+</head>
+
+<body>
+  <div class="wbx_warp">
+    <canvas id = "canv_wbx" width = '320' height = '530' style="opacity: 0.3;"></canvas>
+    <div id="canv_wbx_div">
+      <p class="can_tit">信用分是根据以下五个维度综合评估而来</p>
+      <div class="canv_zmf_num">777</div>
+      <div id="img_1" data-num="1" class="canv_img">
+        <img id="tulip" src="images/sftz_icon.png" id="img_icon"alt="" />
+        <p>身份特质</p>
+      </div>
+      <div id="img_2" data-num="2"  class="canv_img">
+        <img src="images/rmgx_icon.png" id="img_icon"alt="" />
+        <p>人脉关系</p>
+
+      </div>
+      <div id="img_3" data-num="3"  class="canv_img">
+        <img src="images/xyls_icon.png" id="img_icon"alt="" />
+        <p>信用历史</p>
+      </div>
+      <div id="img_4" data-num="4"  class="canv_img">
+        <img src="images/lynl_icon.png" id="img_icon"alt="" />
+        <p>履约能力</p>
+      </div>
+      <div id="img_5" data-num="5"  class="canv_img">
+        <img src="images/xwph_icon.png" id="img_icon"alt="" />
+        <p>行为偏好</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="zxt_div">
+    <p class="zxt_tit">近六个月的信用分趋势</p>
+    <p class="zxt_tit2">比上月增长了<span class="add_num">6</span>分</p>
+    <span class="zmf_num zmf_0">0</span>
+    <span class="zmf_num zmf_1">250</span>
+    <span class="zmf_num zmf_2">500</span>
+    <span class="zmf_num zmf_3">750</span>
+    <span class="zmf_num zmf_4">1000</span>
+    <span class="month_num month_1">5月</span>
+    <span class="month_num month_2">6月</span>
+    <span class="month_num month_3">7月</span>
+    <span class="month_num month_4">8月</span>
+    <span class="month_num month_5">9月</span>
+    <span class="month_num month_6 xz_month">10月</span>
+    <div class="zmf_xs">683</div>
+  </div>
+  <canvas id="zxt" width="500" height="400"></canvas>
+
+  <!-- 弹层部分 -->
+  <div class="mc_bg"></div>
+  <div class="tc_warp">
+    <ul class="tc_lb">
+        <li class="lb_li">
+            <img src="images/t1.png" class="tc_img" alt="" />
+            <p class="lb_tit">身份特质</p>
+            <p class="lb_mes">身份特质：年龄特征描绘了您的身份特质，不同的年龄阶段赋予您不同的积分。</p>
+            <div class="zd_qr">我知道了</div>
+        </li>
+        <li class="lb_li">
+          <img src="images/t3.png" class="tc_img" alt="" />
+          <p class="lb_tit">人脉关系</p>
+          <p class="lb_mes">交往圈子数量展示了您的人脉关系程度，圈子越多，人脉关系评价分数越高。</p>
+          <div class="zd_qr">我知道了</div>
+
+        </li>
+        <li class="lb_li">
+            <img src="images/t4.png" class="tc_img" alt="" />
+            <p class="lb_tit">信用历史</p>
+            <p class="lb_mes">入网时长反映了您的信用历史，入网时间越长，信用历史评价分数越高。</p>
+            <div class="zd_qr">我知道了</div>
+        </li>
+        <li class="lb_li">
+          <img src="images/t5.png" class="tc_img" alt="" />
+          <p class="lb_tit">履约能力</p>
+          <p class="lb_mes">最近六个月的消费情况，逾期欠费次数等信息体现了您的履约能力。</p>
+          <div class="zd_qr">我知道了</div>
+        </li>
+        <li class="lb_li">
+            <img src="images/t2.png" class="tc_img" alt="" />
+            <p class="lb_tit">行为偏好</p>
+            <p class="lb_mes">活跃使用天数、流量使用情况等信息描述了您的行为偏好。</p>
+            <div class="zd_qr">我知道了</div>
+        </li>
+    </ul>
+    <div class="lb_round_warp">
+        <div class="lb_round lb_ad"></div>
+        <div class="lb_round"></div>
+        <div class="lb_round"></div>
+        <div class="lb_round"></div>
+        <div class="lb_round"></div>
+    </div>
+  </div>
+
+<script>
+    var win_width=$(window).width();
+    var win_height=$(window).height();
+    var scale_xs=(win_width)/500;
+    var cav_width=$("#canv_wbx").width();
+    var zxt_width=$("#zxt").width();
+    var tc_width=$(".tc_warp").width();
+    var tc_height=$(".tc_warp").height();
+    $("#canv_wbx_div,#canv_wbx").css("left",(win_width-cav_width)/2);
+    $("#zxt,#zxt_div").css("left",(win_width-zxt_width)/2);
+    $(".mc_bg").height(win_height);
+    $(".tc_warp").css({"top":(win_height-tc_height)/2,"left":(win_width-tc_width)/2});
+    //五边形部分
+    var canv_wbx = document.getElementById("canv_wbx");
+    var context =  canv_wbx.getContext("2d");
+
+    function wubianxing(zx_x,zx_y,w_wbx,n_wbx_1,n_wbx_2,n_wbx_3,n_wbx_4,n_wbx_5){
+      //中心点x，中心的y，外部五边形的长,内部雷达图的五个边的长度
+        n_wbx_1=w_wbx*n_wbx_1/200;     //人脉关系数值 最后的200为最大值
+        n_wbx_2=w_wbx*n_wbx_2/150;     //信用历史数值 最后的150为最大值
+        n_wbx_3=w_wbx*n_wbx_3/190;     //履约能力数值 最后的190为最大值
+        n_wbx_4=w_wbx*n_wbx_4/100;     //行为偏好数值 最后的100为最大值
+        n_wbx_5=w_wbx*n_wbx_5/300;     //身份特质数值 最后的300为最大值
+
+      context.save();//保存状态
+      context.beginPath(zx_x,zx_y);
+      context.fillStyle ='rgba(255,255,255,0.5)';//填充红色，半透明
+      context.strokeStyle ='#fff';//填充绿色
+      context.lineWidth = 1;//设置线宽
+
+      //内部五边形
+      context.moveTo(zx_x+n_wbx_1*Math.cos(change(-18)),zx_y+n_wbx_1*Math.sin(change(-18)));
+      context.lineTo(zx_x+n_wbx_2*Math.cos(change(54)),zx_y+n_wbx_2*Math.sin(change(54)));
+      context.lineTo(zx_x+n_wbx_3*Math.cos(change(126)),zx_y+n_wbx_3*Math.sin(change(126)));
+      context.lineTo(zx_x+n_wbx_4*Math.cos(change(198)),zx_y+n_wbx_4*Math.sin(change(198)));
+      context.lineTo(zx_x+n_wbx_5*Math.cos(change(270)),zx_y+n_wbx_5*Math.sin(change(270)));
+      context.lineTo(zx_x+n_wbx_1*Math.cos(change(-18)),zx_y+n_wbx_1*Math.sin(change(-18)));
+      context.closePath();
+      context.stroke();
+      context.fill();
+
+      //外部五边形
+      context.beginPath();
+      context.strokeStyle="#fff";
+      context.lineWidth="1";
+      context.moveTo(zx_x+w_wbx*Math.cos(change(-18)),zx_y+w_wbx*Math.sin(change(-18)));
+      context.lineTo(zx_x+w_wbx*Math.cos(change(54)),zx_y+w_wbx*Math.sin(change(54)));
+      context.lineTo(zx_x+w_wbx*Math.cos(change(126)),zx_y+w_wbx*Math.sin(change(126)));
+      context.lineTo(zx_x+w_wbx*Math.cos(change(198)),zx_y+w_wbx*Math.sin(change(198)));
+      context.lineTo(zx_x+w_wbx*Math.cos(change(270)),zx_y+w_wbx*Math.sin(change(270)));
+      context.lineTo(zx_x+w_wbx*Math.cos(change(-18)),zx_y+w_wbx*Math.sin(change(-18)));
+      context.closePath();
+      context.stroke();
+
+      // 中心连线
+      zjhx(zx_x+w_wbx*Math.cos(change(54)),zx_y+w_wbx*Math.sin(change(54)));
+      zjhx(zx_x+w_wbx*Math.cos(change(126)),zx_y+w_wbx*Math.sin(change(126)));
+      zjhx(zx_x+w_wbx*Math.cos(change(198)),zx_y+w_wbx*Math.sin(change(198)));
+      zjhx(zx_x+w_wbx*Math.cos(change(270)),zx_y+w_wbx*Math.sin(change(270)));
+      zjhx(zx_x+w_wbx*Math.cos(change(-18)),zx_y+w_wbx*Math.sin(change(-18)));
+
+      function zjhx(line_x,line_y){
+        context.beginPath();
+        context.strokeStyle="#fff";
+        context.moveTo(zx_x,zx_y);
+        context.lineTo(line_x,line_y);
+        context.closePath();
+        context.stroke();
+      }
+
+    }
+
+    //依次传入雷达图的中心坐标X：160（固定），坐标Y：300（固定），外部长度130（固定），
+    //后面五个数值为：人脉关系数值、信用历史数值、履约能力数值、行为偏好数值、身份特质数值
+    wubianxing(160,300,130,100,90,90,80,245);
+
+
+    $(".canv_img").click(function(){
+
+    })
+
+    //控制五边形的上边距
+      $("#canv_wbx_div,#canv_wbx,#zxt,#zxt_div,.tc_warp").css({"-webkit-transform":"scale("+scale_xs+","+scale_xs+")"});
+      if(win_width<321){
+        $("#canv_wbx_div,#canv_wbx").css("top","-18%");
+        $("#zxt").css("top",550*(scale_xs+0.1));
+        $("#zxt_div").css("top",550*(scale_xs+0.11));
+
+      }
+      if(win_width>320){
+        $("#canv_wbx_div,#canv_wbx").css("top","-11%");
+      $("#zxt").css("top",550*(scale_xs+0.1));
+        $("#zxt_div").css("top",550*(scale_xs+0.11));
+      }
+      if(win_width>375){
+        $("#canv_wbx_div,#canv_wbx").css("top","-6%");
+        $("#zxt,#zxt_div").css("top","480px");
+      }
+
+      // 角度转换为弧度
+     function change(deg){
+       var time= deg*Math.PI/180;
+       return time;
+     }
+
+
+
+     //折线图部分
+     var zxt = document.getElementById("zxt");
+     var zxt_cav =  zxt.getContext("2d");
+
+
+     zxt_zbt();
+
+       //坐标图
+  function zxt_zbt(){
+
+    zxt_cav.beginPath();
+    zxt_cav.strokeStyle="#ccc";
+    zxt_cav.moveTo(40,50);
+    zxt_cav.lineTo(40,350);
+    zxt_cav.lineTo(450,350);
+    zxt_cav.stroke();
+
+    zxt_cav.beginPath();
+    zxt_cav.strokeStyle="#e4e4e4";
+    zxt_cav.moveTo(40,50);
+    zxt_cav.lineTo(450,50);
+    zxt_cav.stroke();
+
+    zxt_cav.beginPath();
+    zxt_cav.strokeStyle="#e4e4e4";
+    zxt_cav.moveTo(40,125);
+    zxt_cav.lineTo(450,125);
+    zxt_cav.stroke();
+
+    zxt_cav.beginPath();
+    zxt_cav.strokeStyle="#e4e4e4";
+    zxt_cav.moveTo(40,200);
+    zxt_cav.lineTo(450,200);
+    zxt_cav.stroke();
+
+    zxt_cav.beginPath();
+    zxt_cav.strokeStyle="#e4e4e4";
+    zxt_cav.moveTo(40,275);
+    zxt_cav.lineTo(450,275);
+    zxt_cav.stroke();
+
+  }
+
+     //画折线
+     function zx_draw(x1,y1,x2,y2){
+       y1=zmf_t(y1);
+       y2=zmf_t(y2);
+      // alert(x1+",,,,,"+y1)
+       zxt_cav.beginPath();
+       zxt_cav.strokeStyle="#ff6600";
+       zxt_cav.fillStyle="red";
+       zxt_cav.arc(x1,y1,2,0,2*Math.PI);
+       zxt_cav.arc(x2,y2,2,0,2*Math.PI);
+       zxt_cav.moveTo(x1,y1);
+       zxt_cav.lineTo(x2,y2);
+       zxt_cav.fill();
+       zxt_cav.stroke();
+     }
+     zx_draw(40,500,100,520);
+     zx_draw(100,520,160,540);
+     zx_draw(160,540,220,576);
+     zx_draw(220,576,280,597);
+     zx_draw(280,597,340,632);
+    //  zx_draw(340,597,400,632);
+
+function getEventPosition(ev){
+  	var x, y;
+  	if (ev.layerX || ev.layerX == 0) {
+    	x = ev.layerX;
+    	y = ev.layerY;
+ 	}else if (ev.offsetX || ev.offsetX == 0) { // Opera
+    	x = ev.offsetX;
+    	y = ev.offsetY;
+  	}
+  	return {x: x, y: y};
+}
+
+  $("#zxt").click(function(e){
+    var x1=40,y1=260;
+    var x2=40,y2=zmf_t(500);
+    var x3=100,y3=zmf_t(520);
+    var x4=160,y4=zmf_t(540);
+    var x5=220,y5=zmf_t(576);
+    var x6=280,y6=zmf_t(597);
+    var x7=340,y7=zmf_t(632);
+    var yf_y=360;
+    var x=getEventPosition(e).x;
+    var y=getEventPosition(e).y;
+    var r=20;
+    if(x2-r<x&&x<x2+r&&y2-r<y&&y<y2+r||x2-r<x&&x<x2+r&&yf_y-r<y&&y<yf_y+r){
+      $(".zmf_xs").text(zmf_num(y2)).css({"left":x2-25,"top":y2-45});
+      $(".month_num").removeClass("xz_month");
+      $(".month_num").eq(0).addClass("xz_month");
+    }
+    if(x3-r<x&&x<x3+r&&y3-r<y&&y<y3+r||x3-r<x&&x<x3+r&&yf_y-r<y&&y<yf_y+r){
+      $(".zmf_xs").text(zmf_num(y3)).css({"left":x3-25,"top":y3-45});
+      $(".month_num").removeClass("xz_month");
+      $(".month_num").eq(1).addClass("xz_month");
+    }
+    if(x4-r<x&&x<x4+r&&y4-r<y&&y<y4+r||x4-r<x&&x<x4+r&&yf_y-r<y&&y<yf_y+r){
+      $(".zmf_xs").text(zmf_num(y4)).css({"left":x4-25,"top":y4-45});
+      $(".month_num").removeClass("xz_month");
+      $(".month_num").eq(2).addClass("xz_month");
+    }
+    if(x5-r<x&&x<x5+r&&y5-r<y&&y<y5+r||x5-r<x&&x<x5+r&&yf_y-r<y&&y<yf_y+r){
+      $(".zmf_xs").text(zmf_num(y5)).css({"left":x5-25,"top":y5-45});
+      $(".month_num").removeClass("xz_month");
+      $(".month_num").eq(3).addClass("xz_month");
+    }
+    if(x6-r<x&&x<x6+r&&y6-r<y&&y<y6+r||x6-r<x&&x<x6+r&&yf_y-r<y&&y<yf_y+r){
+      $(".zmf_xs").text(zmf_num(y6)).css({"left":x6-25,"top":y6-45});
+      $(".month_num").removeClass("xz_month");
+      $(".month_num").eq(4).addClass("xz_month");
+    }
+    if(x7-r<x&&x<x7+r&&y7-r<y&&y<y7+r||x7-r<x&&x<x7+r&&yf_y-r<y&&y<yf_y+r){
+      $(".zmf_xs").text(zmf_num(y7)).css({"left":x7-25,"top":y7-45});
+      $(".month_num").removeClass("xz_month");
+      $(".month_num").eq(5).addClass("xz_month");
+    }
+  })
+  
+
+// 传入信用分的位置得信用分
+function zmf_num(zmf_t){
+    var zmf=parseInt(1000-(zmf_t-50)/300*1000);
+    return zmf;
+}
+
+// 传入信用分得信用分的位置
+function zmf_t(zmf){
+  var zmf_t=(1000-zmf)/1000*300+50;
+  return zmf_t;
+}
+
+
+
+// 点击出现弹层
+
+$(".canv_img").click(function(){
+    var img_num=$(this).data("num");
+    var left_lb=-320*(img_num-1);
+    $(".tc_lb").css("left",left_lb);
+    $(".mc_bg,.tc_warp").css("display","block");
+    $(".lb_round").removeClass("lb_ad").eq(img_num-1).addClass("lb_ad");
+    $(document).bind('touchmove',fn=function(e){
+		 e.preventDefault();
+		 e.stopPropagation();
+	});
+})
+$(".zd_qr").click(function(){
+    $(".mc_bg,.tc_warp").css("display","none");
+    $(document).unbind('touchmove');
+})
+//弹层切换
+$(function(){
+  var touch_x1,touch_x2,lb_left,img_num2;
+  var touch_r=80;
+  $(window).on("touchstart",function(e){
+      var touch = e.originalEvent.changedTouches[0];
+      touch_x1 = touch.pageX;
+      lb_left=$(".tc_lb").css("left");
+      lb_left=parseInt(lb_left.substring(0,lb_left.length-2));
+  }).on("touchend",function(e){
+      var touch = e.originalEvent.changedTouches[0];
+      touch_x2 = touch.pageX;
+      var touch_x3=touch_x2-touch_x1;
+      if(touch_x3>0){
+        if(touch_x3>touch_r){
+          if(lb_left<0){
+            lb_left+=320;
+          }
+        }else{
+          lb_left=lb_left;
+        }
+        img_num2=-lb_left/320;
+        $(".tc_lb").css("left",lb_left);
+        $(".lb_round").removeClass("lb_ad").eq(img_num2).addClass("lb_ad");
+      }
+      if(touch_x3<0){
+        if(touch_x3<-touch_r){
+          if(lb_left>-1280){
+            lb_left-=320;
+          }
+        }else{
+          lb_left=lb_left;
+        }
+        img_num2=-lb_left/320;
+        $(".tc_lb").css("left",lb_left);
+        $(".lb_round").removeClass("lb_ad").eq(img_num2).addClass("lb_ad");
+      }
+  })
+
+
+
+
+
+})
+
+</script>
+</body>
+</html>

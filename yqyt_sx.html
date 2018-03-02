@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width,minimum-scale=1,maximum-scale=1.0,user-scalable=0" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="0">
+    <title>逾期延停</title>
+     <link rel="stylesheet" type="text/css" href="css/yqyt.css" />
+      <link rel="stylesheet" type="text/css" href="css/woxinyong.css" />
+     <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="js/top.js"></script>
+  </head>
+  <body>
+     <div boclass="zt_body">
+     	<div class="img_tu">
+     			<img src="images/datu.png"/>
+     	</div>
+     
+     	 <div class="zt_top">
+     	 	   <ul>
+     	 	   	<li>资费标准<span>0元<h6>元/月</h6></span></li>
+     	 	   	<li>状态当前<span><h6>未开通</h6></span></li>
+     	 	   </ul>
+     	  </div>
+     	 	   <div class="zt_tob clear" style="border:none;">
+		     	 	<p>逾期延停</p>
+		     	 	<img src="images/shangjiantou.png" class="dj_img"/>
+		     	 	<img src="images/xiajiantou.png" class="dj_img1"/>
+     	 </div>
+     	 <div class="zt_tanc clear" style="height:1.7rem;margin-bottom:0.2rem;border:none;">
+     	 	<p>
+     	 		逾期延停服务针对过了交费期还没有清欠的客户，
+     	 		仍给予一定的宽限期不予停机，直至宽限期到期
+     	 	</p>
+     	 	<ul style="font-size: 0.23rem;">
+     	 		<li>生效方式：</li>
+     	 		<li>立即生效</li>
+     	 	</ul>
+     	 </div>
+     	
+     	<div class="qd_butt" style="background: #AAAAAA;"> 
+      	 <h6>开通</h6>
+      </div>
+       <p style="color:#ff7744;font-size: 0.2rem;margin: 0.25rem;">您的号码处于欠费停机状态，不能开通逾期延停服务。</p>
+      <ul class="ul_2">
+      	<li style="height: 0.5rem;color: #666;font-size: 0.3rem;">温馨提示：</li>
+      	<li>逾期延停服务针对过了交费期还没有清欠的客户，仍给予一定的宽限期不予停机，直至宽限期到期</li>
+      	<li style="color: #ff7744;">点击了解更多&nbsp;&gt;</li>
+      </ul>
+      
+     	  </div>
+  </body>
+   <script type="text/javascript">
+     	$(function(){
+     		$(".dj_img").click(function(){
+     			$(".zt_tanc").slideUp(1000);
+     			$(".dj_img").css("display","none");
+     			$(".dj_img1").css("display","block");
+     		});
+     		$(".dj_img1").click(function(){
+     			$(".zt_tanc").slideDown(1000);
+     			$(".dj_img").css("display","block");
+     			$(".dj_img1").css("display","none");
+     		});
+     	});
+     </script>
+</html>

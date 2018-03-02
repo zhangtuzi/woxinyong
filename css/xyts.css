@@ -1,0 +1,58 @@
+.zt_body{
+	width: 100%;
+	background:#f5f5f5;
+}
+.cl{
+	clear: both;
+}
+.zt_wtou{
+	width: 100%;
+	
+	background:#1497f5;
+}
+.zt_tou{
+    padding: 0.5rem 0;
+	text-align: center;
+	background:#1497f5;
+	font-size:0.86rem;
+	color: #FFFFFF;
+	
+}
+.tz_img{
+	width: 33.33%;
+    height: 1.3rem;
+    font-size: 0.5rem;
+    float: left;
+}
+.tz_img img{
+	width: 1.2rem;
+	
+}
+.p2{
+	font-size: 0.37rem;
+	margin-left: 0.2rem;
+}
+.p3{
+font-size: 0.3rem;
+	margin-left: 0.1rem;	
+}
+.zt_wb p{
+	padding: 0.25rem;
+	font-size: 0.35rem;
+	background: #F5F5F5;
+}
+.zt_wb li{
+	padding: 0 0.25rem;
+	height:0.8rem;
+	border-bottom: 1px solid #f5f5f5;
+	line-height: 2.9;
+	font-size: 0.3rem;
+	color: #333333;
+	background: #FFFFFF;
+	
+}
+.zt_wb li img{
+	margin-top: 0.35rem;
+	margin-right: 0.2rem;
+	width: 0.23rem;
+}

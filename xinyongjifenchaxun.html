@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width,initial-scale=1.0,minimum-scale=1,maximum-scale=1.0,user-scalable=0" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>信用积分查询</title>
+    <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="js/top.js"></script>
+    <link rel="stylesheet" href="css/reset.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="css/xyjfcx.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <canvas id="bg5" width="300" height="300"></canvas>
+    <canvas id="bg4" width="300" height="300"></canvas>
+    <canvas id="bg3" width="300" height="300"></canvas>
+    <canvas id="bg2" width="300" height="300"></canvas>
+    <canvas id="bg1" width="300" height="300"></canvas>
+    <div id="nr_bg">
+      <div id="xy_zp_warp">
+        <canvas id="xy_zp" width="300" height="300"></canvas>
+        <div class="xyz">350</div>
+        <div class="xypj">信用良好</div>
+        <div class="zp_z zpz_1">0</div>
+        <div class="zp_z zpz_2">较差</div>
+        <div class="zp_z zpz_3">550</div>
+        <div class="zp_z zpz_4">中等</div>
+        <div class="zp_z zpz_5">600</div>
+        <div class="zp_z zpz_6">良好</div>
+        <div class="zp_z zpz_7">650</div>
+        <div class="zp_z zpz_8">优秀</div>
+        <div class="zp_z zpz_9">700</div>
+        <div class="zp_z zpz_10">极好</div>
+        <div class="zp_z zpz_11">1000</div>
+      </div>
+
+      <div class="tp_tit">
+        <div class="hx1 hx"></div>
+        <div class="hx2 hx"></div>
+        <div class="tp_mes">因为信用&nbsp;&nbsp;所以方便</div>
+      </div>
+      <div class="bt_div">
+        <div class="bg_f bgf_1"></div>
+        <div class="bg_f bgf_2"></div>
+        <div class="bt_mes btmes_1">
+           <a href="wjfjd.html"><img src="images/xyfjd.png" class="bt_mes_icon" alt="" /></a>
+            <p>信用分解读</p>
+        </div>
+        <div class="bt_mes btmes_2">
+          <a href="xyts1.html"><img src="images/xyfts.png" class="bt_mes_icon" alt="" /></a>
+          <p>信用提升</p>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      $(function(){
+
+        var i=0;
+        var i1=0;
+        var sd=0;
+        var tm1=0;
+        var tm2=0;
+        var tm3=0;
+        var tm4=0;
+        var tm5=0;
+        var bz=0;//后台传入的信用值
+
+        if(bz<550){
+          i1=550-bz;
+        }
+        var time_st=setInterval(function(){
+
+          if(bz=="0"){
+            zz(80,0)
+          }
+          if(sd<bz){
+            zz(80,sd);
+            sd=sd+1;
+          }
+          if(sd<421){
+            //tm1渐变为小
+            tm1=(550-sd)/200;
+          }
+          if(420<sd&&sd<551){
+            //tm1渐变为0 tm2渐变为1
+
+            tm1=(550-sd)/200;
+            tm2=(sd-420)/130;
+          }
+
+          if(550<sd&&sd<626){
+            //tm2渐变为0 tm3渐变为1
+            tm2=(625-sd)/76;
+            tm3=(sd-550)/76;
+          }
+          if(625<sd&&sd<676){
+            //tm3渐变为0 tm4渐变为1
+            tm3=(675-sd)/50;
+            tm4=(sd-625)/76;
+          }
+          if(675<sd&&sd<825){
+            //tm4渐变为0 tm5渐变da
+            tm4=(825-sd)/150;
+            tm5=(sd-675)/275;
+          }
+          if(825<sd){
+            // tm5渐变为1
+
+            tm5=(sd-675)/275;
+          }
+          i++;
+
+          $(".xyz").html(sd);
+
+          $("#bg1").css("opacity",tm1);
+          $("#bg2").css("opacity",tm2);
+          $("#bg3").css("opacity",tm3);
+          $("#bg4").css("opacity",tm4);
+          $("#bg5").css("opacity",tm5);
+          if(i>sd){
+            clearInterval(time_st);
+          }else{
+            // if(i>50){
+            //   clearInterval(time_st);
+            // }
+          }
+        },2)
+
+
+        var win_height=$(window).height();
+        var win_width=$(window).width();
+        var yh_width=$("#xy_zp_warp").width();
+        var xyz_width=$(".xyz").width();
+        if(win_width>320){
+          $(".zp_z").height("210px");
+        }
+        $("#xy_zp_warp").css("left",(win_width-yh_width)/2);
+        $(".xyz,.xypj").css("left",(yh_width-xyz_width)/2);
+        $("#bg1,#bg2,#bg3,#bg4,#bg5,#nr_bg").css({"width":win_width,"height":win_height,"top":"0","left":"0"});
+        //定义背景颜色
+        var bg1=$("#bg1")[0].getContext("2d");
+        var grd=bg1.createLinearGradient(0,0,0,400);
+        grd.addColorStop(0,"#f52a0f");
+        grd.addColorStop(1,"#f55321");
+        bg1.fillStyle=grd;
+        bg1.fillRect(0,0,600,600);
+
+        var bg2=$("#bg2")[0].getContext("2d");
+        var grd=bg2.createLinearGradient(0,0,0,400);
+        grd.addColorStop(0,"#f4760b");
+        grd.addColorStop(1,"#f89f08");
+        bg2.fillStyle=grd;
+        bg2.fillRect(0,0,600,600);
+
+        var bg3=$("#bg3")[0].getContext("2d");
+        var grd=bg3.createLinearGradient(0,0,0,400);
+        grd.addColorStop(0,"#39b739");
+        grd.addColorStop(1,"#90d449");
+        bg3.fillStyle=grd;
+        bg3.fillRect(0,0,600,600);
+
+        var bg4=$("#bg4")[0].getContext("2d");
+        var grd=bg4.createLinearGradient(0,0,0,400);
+        grd.addColorStop(0,"#0fccf5");
+        grd.addColorStop(1,"#4fd3f4");
+        bg4.fillStyle=grd;
+        bg4.fillRect(0,0,600,600);
+
+        var bg5=$("#bg5")[0].getContext("2d");
+        var grd=bg5.createLinearGradient(0,0,0,400);
+        grd.addColorStop(0,"#0f86f5");
+        grd.addColorStop(1,"#21bdf5");
+        bg5.fillStyle=grd;
+        bg5.fillRect(0,0,600,600);
+
+        // 角度转换为弧度
+          function change(deg){
+            var time= deg*Math.PI/180;
+            return time;
+          }
+
+          function zz(lg2,min){
+            var kdp=$("#xy_zp")[0].getContext("2d");
+            kdp.clearRect(0,0,300,300);
+            //半圆弧
+            kdp.beginPath();
+
+            if(win_width>320){
+              kdp.arc(150,215,120,Math.PI,2*Math.PI);
+            }else{
+              kdp.arc(150,200,100,Math.PI,2*Math.PI);
+            }
+            kdp.lineWidth="3";
+            kdp.strokeStyle="#fff";
+            kdp.stroke();
+
+
+            //指针
+            kdp.beginPath();
+            if(min<551){
+              min=min*36/550;
+              $(".xypj").text('较差');
+            }
+            console.log(min);
+            if(550<min&&min<601){
+              min=(min-550)*36/50+36;
+              $(".xypj").text('中等');
+            }
+            if(600<min&&min<651){
+              min=(min-600)*36/50+72;
+              $(".xypj").text('良好');
+            }
+            if(650<min&&min<701){
+              min=(min-650)*36/50+108;
+              $(".xypj").text('优秀');
+            }
+            if(700<min&&min<1000){
+              min=(min-700)*36/300+144;
+              $(".xypj").text('极好');
+            }
+            if(win_width>320){
+              kdp.moveTo(150+120*Math.cos(change(min-180)),215+120*Math.sin(change(min-180)));
+              kdp.lineTo(150+125*Math.cos(change(min-180)),215+125*Math.sin(change(min-180)));
+            }else{
+              kdp.moveTo(150+100*Math.cos(change(min-180)),200+100*Math.sin(change(min-180)));
+              kdp.lineTo(150+105*Math.cos(change(min-180)),200+105*Math.sin(change(min-180)));
+            }
+
+
+            kdp.lineWidth="2";
+            kdp.stroke();
+
+
+            // kdp.font="3px 微软雅黑";
+            // kdp.strokeText("350",60,205);
+            //刻度
+            for(var i=174;i<360;){
+              i+=6;
+              var lg=100;
+              var lg1=90;
+              var lg2=95;
+              var lg3=115;
+              var lg4=120;
+              var lg5=110;
+              kdp.beginPath();
+              if(win_width>320){
+                kdp.moveTo(150+lg4*Math.cos(change(i)),215+lg4*Math.sin(change(i)));
+                kdp.lineTo(150+lg3*Math.cos(change(i)),215+lg3*Math.sin(change(i)));
+              }else{
+                kdp.moveTo(150+lg2*Math.cos(change(i)),200+lg2*Math.sin(change(i)));
+                kdp.lineTo(150+lg*Math.cos(change(i)),200+lg*Math.sin(change(i)));
+              }
+
+              kdp.lineWidth=1;
+              if(i%36==0){
+                kdp.lineWidth=2;
+                if(win_width>320){
+                  kdp.moveTo(150+lg5*Math.cos(change(i)),215+lg5*Math.sin(change(i)));
+                  kdp.lineTo(150+lg4*Math.cos(change(i)),215+lg4*Math.sin(change(i)));
+                }else{
+                  kdp.moveTo(150+lg1*Math.cos(change(i)),200+lg1*Math.sin(change(i)));
+                  kdp.lineTo(150+lg*Math.cos(change(i)),200+lg*Math.sin(change(i)));
+                }
+
+              }
+              kdp.strokeStyle="#333";
+              kdp.strokeStyle="#fff";
+              kdp.stroke();
+            }
+
+          }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name='viewport' content="width=device-width,minimum-scale=1,maximum-scale=1.0,user-scalable=0" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="0">
+    <title>信用额度调整</title>
+     <link rel="stylesheet" type="text/css" href="css/xxqr.css" />
+     <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="js/top.js"></script>
+  </head>
+  <body>
+     <div boclass="zt_body">
+     	 <div class="zt_top"> 
+		     	 		<img src="images/rentou.png"/>
+		     	 	 <p>信息确认</p>
+     	 	   <ul>
+     	 	   	<li>客户姓名<span>郭鹏</span></li>
+     	 	   	<li>手机号码<span>151351533332</span></li>
+     	 	   </ul>
+     	 </div>
+     	 <div class="zt_wz">
+     	 	   <h6>尊敬的客户：您申请50元的临时信用额度，有效期到2016年10月24日，业务受理成功后将立即生效。</h6>
+           <p>办理时间: 2016年10月10日</p>
+           <div class="anniu1">
+           	  <span>取消</span>
+           </div>
+           <a href="edtz1.html"><div class="anniu2">
+           	  <span>确定</span>
+           	
+           </div></a>
+     	 </div>
+     </div>
+  </body>
+  <script type="text/javascript">
+  	 $(function(){
+  	 	$(".anniu1").click(function(){
+  	 		$(".anniu1").css({"background":"#FF7744","border":"none","color":"#ffffff"});
+  	 		$(".anniu2").css({"background":"#ffffff","border":"1px solid #FF7744","color":"#FF7744"});
+  	 	});
+  	 		$(".anniu2").click(function(){
+  	 		$(".anniu2").css({"background":"#FF7744","border":"none","color":"#ffffff"});
+  	 		$(".anniu1").css({"background":"#ffffff","border":"1px solid #FF7744","color":"#FF7744"});
+  	 	});
+  	 });
+  </script>
+</html>
